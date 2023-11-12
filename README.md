@@ -8,15 +8,19 @@ The "Music Hits" project aims to build a fullstack website, with a responsive fr
 
 CHANGE
 ## Functionalities:
-- [x]   <strong>Login Page:</strong> The user can connect (if the user and email are valid and previously created) and the app will autenticat the data, and generate an acess token and go to the Feed page.
-- [x]  <strong>Sign up Page:</strong> The user can creat an account (with email that haven't been used before), and the app will generate an acess token and go to the Feed page.
-- [x]  <strong>Feed page:</strong> Only authorized to be seen if a valid user is logged and the JWT token. The page shows all the posts created by all users.
+- [x]   <strong>Login Page:</strong> The user can connect (if the user and email are valid and previously created) and the app will autenticat the data, and generate an acess token and go to the Home page.
+- [x]  <strong>Sign up Page:</strong> The user can creat an account (with email that haven't been used before), and the app will generate an acess token and go to the Home page.
+- [x]  <strong>Home page:</strong> Only authorized to be seen if a valid user is logged and the JWT token was generated. The page shows all the posts created by all users OR only the posts of users you follow.
 - [x]  <strong>Like or dislike:</strong> The user can like or dislike a post or a comment.
-- [x]  <strong>Create post or comment:</strong> The user can create on the textfield a new post, or can comment on an existing post.
-- [x]  <strong>Layered Architecture:</strong> The app's structure was built and organized with layered architecture to make the code more organized and for its reusability, maintainability and scalability.
+- [x]  <strong>Create post or comment:</strong> The user can create a new post, or can comment on an existing post.
+- [x]  <strong>Update or delete post:</strong> The user can update or delete a post only if he/she was the one that created it.
+- [x]  <strong>Update profile:</strong> The user can change its name, bio and profile photo.
+- [x]  <strong>Notifications</strong> The user can see if he/she has a new follower or if someone liked its posts.
+- [x]  <strong>Searh for users:</strong> The user can search for other users by typing its names on the search field.
+- [x]  <strong>Hashed passwords:</strong> All the passwords are hashed using BcryptJS before its storage on the databse, so the information is protected.
+- [x]  <strong>Layered Architecture:</strong> The app's backend structure was built and organized with layered architecture to make the code more organized and for its reusability, maintainability and scalability.
 - [x]  <strong>Frontend + Api:</strong> Integration with the backend API, using React, axios and endpoints that receives data, based on the API's documentation.
 - [x]  <strong>React Router:</strong> Navigation between pages with React Router.
-- [x]  <strong>Hashed passwords:</strong> All the passwords are hashed using BcryptJS before its storage on the databse, so the information is protected.
 - [x]  <strong>Database:</strong> All the users, posts, comments and likes/dislikes information are storaged on an SQLite database in the backend.
 
 ## Front-end deploy:
