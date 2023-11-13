@@ -102,8 +102,8 @@ The app's front-end is already deployed, but if you want to run the project in y
 ## Images:
 
 <p align="center">
-  <img src="./template/src/assets/1.jpg" alt="project print screen" width="600">
-  <img src="./template/src/assets/2.jpg" alt="project print screen" width="600">  
+  <img src="/front-end/src/assets/1.jpg" alt="project print screen" width="600">
+  <img src="front-end/src/assets/2.jpg" alt="project print screen" width="600">  
   <img src="./template/src/assets/3.jpg" alt="project print screen" width="600">  
   <img src="./template/src/assets/4.jpg" alt="project print screen" width="600">  
   <img src="./template/src/assets/5.jpg" alt="project print screen" width="600">  
