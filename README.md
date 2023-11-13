@@ -1,7 +1,7 @@
 # [Music Hits](https://)
 
 <p align="center">
-  <img src="./front-end/src/assets/musichits1.gif" alt="project gif" width="600">
+  <img src="./src/assets/musichits1.gif" alt="project gif" width="600">
 </p>
 <p align="center">
   <img src="./front-end/src/assets/musichits2.gif" alt="project gif" width="600">
