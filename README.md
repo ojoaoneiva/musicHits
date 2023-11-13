@@ -1,12 +1,19 @@
 # [Music Hits](https://)
 
+<p align="center">
+  <img src="./front-end/src/assets/musichits1.gif" alt="project gif" width="600">
+</p>
+<p align="center">
+  <img src="./front-end/src/assets/musichits2.gif" alt="project gif" width="600">
+</p>
+
 
 Go to the API Docummentation [here](https://)
 
 ## About:
 The "Music Hits" project aims to build a fullstack website, with a responsive frontend of a social media plataform to share music videos and its backend applicaction that builds an API with data source for users, posts, likes, and comments. The front-end consists on pages for login and signup, profile page, Home page with all user's posts or friend's posts, and sections to show notifications, search for users and create new posts.
 
-CHANGE
+
 ## Functionalities:
 - [x]   <strong>Login Page:</strong> The user can connect (if the user and email are valid and previously created) and the app will autenticat the data, and generate an acess token and go to the Home page.
 - [x]  <strong>Sign up Page:</strong> The user can creat an account (with email that haven't been used before), and the app will generate an acess token and go to the Home page.
@@ -15,7 +22,7 @@ CHANGE
 - [x]  <strong>Create post or comment:</strong> The user can create a new post, or can comment on an existing post.
 - [x]  <strong>Update or delete post:</strong> The user can update or delete a post only if he/she was the one that created it.
 - [x]  <strong>Update profile:</strong> The user can change its name, bio and profile photo.
-- [x]  <strong>Notifications</strong> The user can see if he/she has a new follower or if someone liked its posts.
+- [x]  <strong>Notifications:</strong> The user can see if he/she has a new follower or if someone liked its posts.
 - [x]  <strong>Searh for users:</strong> The user can search for other users by typing its names on the search field.
 - [x]  <strong>Hashed passwords:</strong> All the passwords are hashed using BcryptJS before its storage on the databse, so the information is protected.
 - [x]  <strong>Layered Architecture:</strong> The app's backend structure was built and organized with layered architecture to make the code more organized and for its reusability, maintainability and scalability.
@@ -93,3 +100,12 @@ The app's front-end is already deployed, but if you want to run the project in y
 - Styled-components
 
 ## Images:
+
+<p align="center">
+  <img src="./template/src/assets/1.jpg" alt="project print screen" width="600">
+  <img src="./template/src/assets/2.jpg" alt="project print screen" width="600">  
+  <img src="./template/src/assets/3.jpg" alt="project print screen" width="600">  
+  <img src="./template/src/assets/4.jpg" alt="project print screen" width="600">  
+  <img src="./template/src/assets/5.jpg" alt="project print screen" width="600">  
+  <img src="./template/src/assets/6.jpg" alt="project print screen" width="600">  
+</p>
