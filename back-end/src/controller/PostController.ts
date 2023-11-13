@@ -30,11 +30,11 @@ export class PostController {
             console.log(error)
 
             if (error instanceof ZodError) {
-                res.status(400).send("As propriedades title, link e content são obrigatórias")
+                res.status(400).send("The properties: title, link and content are all required")
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -62,7 +62,7 @@ export class PostController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message);
             } else {
-                res.status(500).send("Erro inesperado");
+                res.status(500).send("Unespected error");
             }
         }
     };
@@ -85,7 +85,7 @@ export class PostController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -95,7 +95,7 @@ export class PostController {
             const validProperties = ['title', 'link', 'content'];
             const isValidRequest = Object.keys(req.body).every(key => validProperties.includes(key));
             if (!isValidRequest) {
-                throw new BadRequestError("Propriedades inválidas no corpo da solicitação");
+                throw new BadRequestError("Invalid properties in the body");
             }
 
             const input = EditPostSchema.parse({
@@ -117,7 +117,7 @@ export class PostController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message);
             } else {
-                res.status(500).send("Erro inesperado");
+                res.status(500).send("Unespected error");
             }
         }
     }
@@ -140,7 +140,7 @@ export class PostController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -163,7 +163,7 @@ export class PostController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -186,7 +186,7 @@ export class PostController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -209,7 +209,7 @@ export class PostController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }

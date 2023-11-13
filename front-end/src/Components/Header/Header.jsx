@@ -11,18 +11,18 @@ export const Header = () => {
     const navigate = useNavigate();
     useProtectedPage();
 
-    const [menuOpen, setMenuOpen] = useState(true);
+    const [menuopen, setMenuopen] = useState(true);
     const [searchOpen, setSearchOpen] = useState(false);
     const [createPostOpen, setCreatePostOpen] = useState(false);
     const [notificationsOpen, setNotificationsOpen] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobilemenuopen, setMobileMenuOpen] = useState(false);
 
     const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
+        setMenuopen(!menuopen);
     };
 
     const toggleMobileMenu = () => {
-        setMobileMenuOpen(!mobileMenuOpen);
+        setMobileMenuOpen(!mobilemenuopen);
     };
 
     const closeMenu = () => {
@@ -63,11 +63,12 @@ export const Header = () => {
 
     return (
         <>
-            <MobileButton onClick={toggleMobileMenu} mobileMenuOpen={mobileMenuOpen}>Menu</MobileButton>
-            <HeaderStyle menuOpen={menuOpen} mobileMenuOpen={mobileMenuOpen}>
-                <Close className="close" menuOpen={menuOpen} onClick={toggleMobileMenu}>X</Close>
+            <MobileButton onClick={toggleMobileMenu} menuopen={menuopen.toString()}>Menu</MobileButton>
+            <HeaderStyle menuopen={menuopen.toString()} mobilemenuopen={mobilemenuopen.toString()}>
+            <Close className="close" menuopen={menuopen.toString()} onClick={toggleMobileMenu}>X</Close>
+
                 <div className="navbar">
-                    {!menuOpen && (<>
+                    {!menuopen && (<>
 
                         <div className="menu-icon" onClick={closeMenu}>
                             Menu
@@ -75,7 +76,7 @@ export const Header = () => {
                     </>
                     )}
 
-                    {menuOpen && (
+                    {menuopen && (
                         <div className="menu">
                             <ul className="ul">
                                 <li className="li">

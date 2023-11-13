@@ -85,7 +85,7 @@ export class UserDatabase extends BaseDatabase {
         const followingUser = await this.getUsersById(followingId);
 
         if (!followingUser) {
-            return "O usuário a ser seguido não existe";
+            return "The user to be followed does not exist";
         }
 
         const existingFollow = await BaseDatabase.connection(UserDatabase.TABLE_FOLLOWERS)
@@ -101,14 +101,14 @@ export class UserDatabase extends BaseDatabase {
                     user_id_follower: id,
                 })
                 .del();
-            return "Você deixou de seguir este usuário.";
+            return "You don't follow this user anymore";
         } else {
             await BaseDatabase.connection(UserDatabase.TABLE_FOLLOWERS)
                 .insert({
                     user_id_following: followingId,
                     user_id_follower: id,
                 });
-            return "Você está seguindo este usuário agora.";
+            return "You are following this user";
         }
     }
 

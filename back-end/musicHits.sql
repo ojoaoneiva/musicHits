@@ -1,4 +1,5 @@
--- Active: 1698233036757@@127.0.0.1@3306
+-- Active: 1699798428286@@127.0.0.1@3306
+
 
 CREATE TABLE
     users (
@@ -16,21 +17,21 @@ INSERT INTO
     users (id, name, email, password, role)
 VALUES (
         'u001',
-        'Fulano',
-        'fulano@email.com',
-        '$2a$12$qPQj5Lm1dQK2auALLTC0dOWedtr/Th.aSFf3.pdK5jCmYelFrYadC',
+        'Leo',
+        'leo@email.com',
+        '$2a$12$bPiMKn25D3QLjKx7ZvixLuB8sWlo9/8Bv443HU3WBOllc0Of0ax9u',
         'NORMAL'
     ), (
         'u002',
-        'Beltrana',
-        'beltrana@email.com',
-        '$2a$12$403HVkfVSUbDioyciv9IC.oBlgMqudbnQL8ubebJIXScNs8E3jYe2',
+        'Maria',
+        'maria@email.com',
+        '$2a$12$9bfeHQZyoh.3uD1hLAB6iu45cl8k3VRXgaEqTmY3o0phyeo0YsOY.',
         'NORMAL'
     ), (
         'u003',
-        'Astrodev',
-        'astrodev@email.com',
-        '$2a$12$lHyD.hKs3JDGu2nIbBrxYujrnfIX5RW5oq/B41HCKf7TSaq9RgqJ.',
+        'Ana',
+        'ana@email.com',
+        '$2a$12$09fkR7Bvvv44R8k7O59ZPeBPw87kEns6R9rQrTb8kJDv93NuXBjQC',
         'ADMIN'
     );
 
@@ -52,24 +53,21 @@ INSERT INTO
 VALUES (
         'p001',
         'u001',
-        'An obsession to detail',
+        'Billie Eilish - my future',
         'https://www.youtube.com/watch?v=Dm9Zf1WYQ_A',
-        '
-Our overriding philosophy of Brutal Simplicity of Thought, and the spirit of entrepreneurship that was entrenched from the start, means that today there are 23 M&C Saatchi offices globally. Making it the largest independent agency network in the world.'
+        'This song is relatable, and inspirational on another level. Her voice is so beautiful it calms me down. Thanks for helping us get through tough times Billie'
     ), (
         'p002',
         'u002',
-        'Titulo video 2',
-        'https://www.youtube.com/watch?v=G_BhUxx-cwk',
-        '
-Our overriding philosophy of Brutal Simplicity of Thought, and the spirit of entrepreneurship that was entrenched from the start, means that today there are 23 M&C Saatchi offices globally. Making it the largest independent agency network in the world.'
+        'Jungle - Back On 74',
+        'https://www.youtube.com/watch?v=q3lX2p_Uy9I',
+        'I love how the camera changed the focus on dancers, just the entire coordination was so well played! I can literally see EVERYONE shining in this video and its so mesmerizing! This song reminds me of times that I have never lived in and memories I have never made. It has something beautifully nostalgic. And the choreography transfers all of these emotions perfectly. Im in love!'
     ), (
         'p003',
         'u002',
-        'Titulo video 3',
-        'https://www.youtube.com/watch?v=LZyybvVx-js',
-        '
-Our overriding philosophy of Brutal Simplicity of Thought, and the spirit of entrepreneurship that was entrenched from the start, means that today there are 23 M&C Saatchi offices globally. Making it the largest independent agency network in the world.'
+        'METRONOMY - THE LOOK',
+        'https://www.youtube.com/watch?v=sFrNsSnk8GM',
+        'Its so crazy how clean each instrument sounds as it enters the song. Is it just me? I can hear literally each individual part. Doesnt sound “mashed” up at all'
     );
 
 CREATE TABLE
@@ -81,7 +79,9 @@ CREATE TABLE
         FOREIGN KEY (post_id) REFERENCES posts (id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
-DROP TABLE likes_dislikes 
+INSERT INTO
+    likes_dislikes (user_id, post_id)
+VALUES ('u001', 'p002'), ('u001', 'p003'), ('u002', 'p001'), ('u003', 'p001');
 
 CREATE TABLE
     post_comments (
@@ -102,17 +102,17 @@ VALUES (
         'c001',
         'u002',
         'p001',
-        'Parabens pela postagem'
+        'Thanks for sharing this with us'
     ), (
         'c002',
         'u003',
         'p002',
-        'Concordo com você'
+        'I loved this!'
     ), (
         'c003',
         'u002',
         'p001',
-        'Gostei!'
+        'Great!'
     );
 
 CREATE TABLE
@@ -123,7 +123,6 @@ CREATE TABLE
         FOREIGN KEY (comment_id) REFERENCES post_comments (id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
--- Criação da tabela de seguidores
 
 CREATE TABLE
     followers (
@@ -134,7 +133,6 @@ CREATE TABLE
         FOREIGN KEY (user_id_follower) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
--- Inserção de alguns seguidores de exemplo
 
 INSERT INTO
     followers (user_id_following, user_id_follower)

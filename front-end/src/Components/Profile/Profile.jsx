@@ -187,7 +187,7 @@ export const Profile = () => {
           {user && user.profilePhoto ? (
             <UserProfilePicture src={user.profilePhoto} alt={user.name} />
           ) : (
-            <NoUserProfilePicture>{user && user.name ? user.name[0] : "No Name"}</NoUserProfilePicture>
+            <NoUserProfilePicture>{user && user.name ? user.name[0] : ""}</NoUserProfilePicture>
           )}
 
           <UserProfileInfo>
@@ -205,7 +205,7 @@ export const Profile = () => {
                 <button onClick={() => renderPostDetail(user)}>settings</button>
               )}
             </UserProfileStats>
-            <UserProfileBio>{user.bio}</UserProfileBio>
+            <UserProfileBio>{user && user.bio ? user.bio : ""}</UserProfileBio>
           </UserProfileInfo>
 
           {postOpen && (

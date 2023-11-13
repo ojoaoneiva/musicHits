@@ -213,7 +213,7 @@ border:none;
   color: red; 
 }
 .notlikedComment {
-  color: #9c9c9c;
+  color: black;
 }
   button{
     border: none;

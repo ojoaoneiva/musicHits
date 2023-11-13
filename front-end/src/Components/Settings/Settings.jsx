@@ -83,7 +83,7 @@ export const Settings = ({ user, changeScreen, update }) => {
                 onChange={handleNewLinkChange}
               />
               <NewCommentInput
-                placeholder="Write your post..."
+                placeholder="url to your new profile picture"
                 value={newProfilePhoto}
                 onChange={handleNewContentChange}
               />

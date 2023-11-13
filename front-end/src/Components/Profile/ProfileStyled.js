@@ -87,7 +87,7 @@ export const UserProfileStat = styled.button`
 
 export const UserProfileBio = styled.p`
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const UserProfilePosts = styled.div`

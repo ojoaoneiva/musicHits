@@ -56,7 +56,7 @@ export class CommentBusiness {
 
         const postDB = await this.postDatabase.findPostById(idToComment)
         if (!postDB) {
-            throw new NotFoundError("Post com essa id não existe")
+            throw new NotFoundError("Does not exists a Post with this ID")
         }
 
         const CommentDBandCreators = await this.commentDatabase.getCommentsAndCreators(idToComment)
@@ -91,7 +91,7 @@ export class CommentBusiness {
         const commentDBandCreator = await this.commentDatabase.findCommentAndCreatorById(postId)
 
         if (!commentDBandCreator) {
-            throw new NotFoundError("Post com essa id não existe")
+            throw new NotFoundError("Does not exists a Post with this ID")
         }
 
         const comment = new Comment(
@@ -140,7 +140,7 @@ export class CommentBusiness {
         const postDBandCreator = await this.commentDatabase.findCommentAndCreatorById(postId)
 
         if (!postDBandCreator) {
-            throw new NotFoundError("Post com essa id não existe")
+            throw new NotFoundError("Does not exists a Post with this ID")
         }
 
         const likeDislikeCommentDB: LikeDislikeCommentDB = {

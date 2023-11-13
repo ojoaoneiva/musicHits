@@ -24,15 +24,10 @@ export const Form = styled.div`
 `;
 
 export const Icon = styled.span`
-    position: relative;
-    left: 85%;
-    bottom: 50px;
     color: #ababab;
     scale: 1.2;
-    @media screen and (min-width: 750px) {
-      position: relative;
-    left: 19vw;
-  }
+    margin-left: -35px;
+    margin-top: 15px;
 `;
 
 export const SingUp = styled.div`
@@ -107,6 +102,9 @@ export const InputContainer = styled.div`
   flex-direction: column;
   gap: 6px;
   align-items: start;
+  div{
+    display: flex;
+  }
 `;
 
 export const Input = styled.input`
@@ -140,6 +138,7 @@ export const SolidButton = styled.button`
   color: white;
   border: none;
   border-radius: 4px;
+  margin-top: 30px;
   cursor: pointer;
   width: 70vw;
   max-width: 250px;

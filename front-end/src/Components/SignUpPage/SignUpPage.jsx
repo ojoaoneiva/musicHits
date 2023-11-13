@@ -27,11 +27,27 @@ export const SignUpPage = () => {
       }
       const res = await axios.post(`${BASE_URL}/users/signup`, body);
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("email", res.data.email);
       goToHome(navigate);
+      getUserId(res.data.token)
     } catch (error) {
       alert(error?.response?.data);
       console.error(error?.response?.data);
+    }
+  };
+
+  const getUserId = async (token) => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    }
+    try {
+      const response = await axios.get(`${BASE_URL}/users/`, config);
+      const usersData = response.data;
+      const user = usersData.find(user => user.email === form.email);
+      localStorage.setItem("userId", user.id);
+    } catch (error) {
+      console.log(error.response);
     }
   };
 
@@ -67,7 +83,8 @@ export const SignUpPage = () => {
                 onChange={onChange}
               />
               <label>Password</label>
-              <Input
+              <div>
+                <Input
                 placeholder="Password123"
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -81,6 +98,8 @@ export const SignUpPage = () => {
               >
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </Icon>
+              </div>
+              
             </InputContainer>
 
             <ButtonContainer>

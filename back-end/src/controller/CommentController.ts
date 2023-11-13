@@ -31,7 +31,7 @@ export class CommentController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -55,7 +55,7 @@ export class CommentController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -80,7 +80,7 @@ export class CommentController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }
@@ -104,7 +104,7 @@ export class CommentController {
             } else if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
-                res.status(500).send("Erro inesperado")
+                res.status(500).send("Unespected error")
             }
         }
     }

@@ -107,6 +107,7 @@ export const SolidButton = styled.button`
   height: 51px;
   border-radius: 27px;
   font-size: 16px;
+  margin-left: -20px;
 `;
 
 export const Icon = styled.span`

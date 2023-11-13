@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
-import { goToLoginPage, goToProfile } from "../../router/Coordinator";
+import { goToProfile } from "../../router/Coordinator";
 import { Header } from "../Header/Header";
 import { LikeDislike } from "./HomeStyled";
 import {
@@ -50,27 +50,12 @@ export const Home = () => {
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [alreadyFollowing, setAlreadyFollowing] = useState(false);
   const [viewAllUsers, setViewAllUsers] = useState(true);
   const [friendsPosts, setFriendsPosts] = useState([]);
 
   useEffect(() => {
     getPosts();
-  }, [viewAllUsers, alreadyFollowing]);
-
-  useEffect(() => {
-    if (posts.length > 0) {
-      const friendsList = posts
-        .filter((post) => post.creator.id !== localStorage.getItem("userId"))
-        .map((post) => post.creator.id);
-      setFriendsPosts(
-        posts.filter(
-          (post) =>
-            friendsList.includes(post.creator.id) && alreadyFollowing
-        )
-      );
-    }
-  }, [posts, alreadyFollowing]);
+  }, [viewAllUsers]);
 
   const getPosts = async () => {
     try {
@@ -83,17 +68,25 @@ export const Home = () => {
           const likeResponse = await findLike(post.id);
           const isLiked = likeResponse === "like exist" ? true : false;
 
-          await checkIfAlreadyFollowing(post.creator.id);
+          const isFollowing = await checkIfAlreadyFollowing(post.creator.id);
 
           return {
             ...post,
             commentCount: commentsResponse.length,
             liked: isLiked,
+            isFollowing: isFollowing
           };
         })
       );
 
       setPosts(postsWithCommentCount);
+
+      setFriendsPosts(
+        postsWithCommentCount.filter((post) => 
+            post.creator.id !== localStorage.getItem("userId") && post.isFollowing===true
+          )
+        );
+      
     } catch (error) {
       console.log(error.response);
     }
@@ -103,15 +96,15 @@ export const Home = () => {
     try {
       const response = await axios.get(`${BASE_URL}/users/followers/${creatorId}`, config);
       const isFollowing = response.data.some(user => user.userIdFollower === localStorage.getItem("userId"));
-      setAlreadyFollowing(isFollowing);
+      console.log(isFollowing)
+      return isFollowing;
     } catch (error) {
       console.log(error.response);
     }
   };
 
   const followOrUnfollow = async (id) => {
-    setAlreadyFollowing(!alreadyFollowing);
-
+    getPosts();
     try {
       await axios.post(`${BASE_URL}/users/${id}`, {}, config);
     } catch (error) {
@@ -142,13 +135,17 @@ export const Home = () => {
 
   const likePost = async (id) => {
     try {
-      await axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
+      const response = await axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
+
+      const likeResponse = await findLike(id);
+      const isLiked = likeResponse === "like exist" ? true : false;
 
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
-          post.id === id ? { ...post, liked: true, likes: post.likes + 1 } : post
+          post.id === id ? { ...post, liked: isLiked, likes: response.data.likes } : post
         )
-      );
+       
+      ); getPosts()
     } catch (error) {
       console.log(error.response);
     }
@@ -279,7 +276,7 @@ export const Home = () => {
     };
   };
 
-  const handleScrollDebounced = debounce(() => {
+  debounce(() => {
     if (
       window.innerHeight + window.scrollY >=
       document.body.scrollHeight - scrollThreshold
@@ -377,7 +374,7 @@ export const Home = () => {
                       {post.creator.name}
                     </button>{" "}
                     {post.creator.id !== localStorage.getItem("userId") &&
-                      !alreadyFollowing && (
+                      post.isFollowing===false && (
                         <Follow>
                           <button
                             onClick={() => followOrUnfollow(post.creator.id)}
@@ -444,30 +441,14 @@ export const Home = () => {
                       {post.creator.name}
                     </button>{" "}
                   </CommentUser>
-                  {localStorage.getItem("userId") === post.creator.id && (
-                    <div>
-                      <Icon>
-                        <FontAwesomeIcon
-                          icon={faEllipsisH}
-                          onClick={() => renderPostDetail(post)}
-                        />
-                      </Icon>
-                      {editOpen && (
-                        <EditOptions
-                          post={selectedPost}
-                          changeScreen={changeEditScreen}
-                          update={update}
-                        />
-                      )}
-                    </div>
-                  )}
+                
                   <CommentTitle>{post.title}</CommentTitle>
                   <VideoContainer>
                     <YouTubeVideo videoUrl={post.link} />
                   </VideoContainer>
                   <CommentContent>{post.content}</CommentContent>
                   <CommentButtons>
-                    <LikeDislike>
+                  <LikeDislike>
                       <button
                         onClick={() => likePost(post.id)}
                         className={
@@ -508,14 +489,14 @@ export const Home = () => {
                       ))}
                       <NewCommentContainer>
                         <NewCommentInput
-                          placeholder="Adicionar um comentário..."
+                          placeholder="Add a comment..."
                           value={newComment}
                           onChange={handleNewCommentChange}
                         />
                         <SolidButton
                           onClick={() => createComment(post.id)}
                         >
-                          Responder
+                          Comment
                         </SolidButton>
                         <Line></Line>
                       </NewCommentContainer>

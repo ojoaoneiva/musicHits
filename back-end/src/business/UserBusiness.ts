@@ -35,7 +35,7 @@ export class UserBusiness {
             email,
             hashedPassword,
             USER_ROLES.NORMAL,
-            "create a bio",
+            "",
             "",
             new Date().toISOString()
         )
@@ -62,7 +62,7 @@ export class UserBusiness {
         const userDB = await this.userDatabase.findUserByEmail(email)
 
         if (!userDB) {
-            throw new NotFoundError("email não cadastrado")
+            throw new NotFoundError("Does not exists a User with this email")
         }
 
         const user = new User(
@@ -81,7 +81,7 @@ export class UserBusiness {
         const isPasswordCorrect = await this.hashManager.compare(password, hashedPassword)
 
         if (!isPasswordCorrect) {
-            throw new BadRequestError("email e/ou senha invalidos")
+            throw new BadRequestError("Invalid email and/or password")
         }
 
         const payload: TokenPayload = {
@@ -220,7 +220,7 @@ export class UserBusiness {
 
         const userId = payload.id;
         if (userId === id) {
-            throw new BadRequestError("Voce nao pode se seguir.");
+            throw new BadRequestError("You can't follow yourself");
         }
 
         const result = await this.userDatabase.createFollowing(userId, id);
@@ -228,7 +228,7 @@ export class UserBusiness {
         if (result) {
             return result;
         } else {
-            throw new BadRequestError("Erro ao seguir o usuário.");
+            throw new BadRequestError("Error while following this user");
         }
     }
 
@@ -244,7 +244,7 @@ export class UserBusiness {
         const existingUser = await this.userDatabase.findUserById(payload.id);
 
         if (!existingUser) {
-            throw new NotFoundError("User com esse ID não existe");
+            throw new NotFoundError("Does not exists a User with this ID");
         }
 
         if (updates.name) {

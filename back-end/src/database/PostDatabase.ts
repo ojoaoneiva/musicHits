@@ -139,7 +139,7 @@ export class PostDatabase extends BaseDatabase {
             })
             ;
         if (result === undefined) {
-            return "não existe like ainda";
+            return "like doesn't exists yet";
         } else {
             return result as LikeDislikeDB[];
         }

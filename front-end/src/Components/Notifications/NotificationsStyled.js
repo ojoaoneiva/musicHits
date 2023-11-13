@@ -19,6 +19,7 @@ export const Container = styled.section`
     font-weight: normal;
     @media screen and (max-width: 900px) {  
       margin-left: 7vw;
+      font-size: 26px;
     }
     @media screen and (max-width: 500px) {
       margin-left: 4vw;

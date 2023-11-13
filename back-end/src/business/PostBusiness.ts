@@ -6,7 +6,7 @@ import { UnauthorizedError } from "../erros/UnauthorizedError";
 import { LikeDislikeDB, POST_LIKE, Post } from "../models/Post";
 import { GetPostInput, GetPostOutput } from "../dtos/post/getPost.dto";
 import { NotFoundError } from "../erros/NotFoundError";
-import { LikeOrDislikePostInput, LikeOrDislikePostOutput } from "../dtos/post/likeOrDislikePost.dto";
+import { LikeOrDislikePostInput } from "../dtos/post/likeOrDislikePost.dto";
 import { GetPostByIdInput } from "../dtos/post/getPostById.dto";
 import { EditPostInput, EditPostOutput } from "../dtos/post/editPost.dto";
 
@@ -47,7 +47,7 @@ export class PostBusiness {
     }
 
     public getPosts = async (input: GetPostInput): Promise<GetPostOutput> => {
-      const { token, offset, limit } = input; // Adicione os parâmetros offset e limit
+      const { token, offset, limit } = input;
 
       const payload = this.tokenManager.getPayload(token);
 
@@ -109,7 +109,7 @@ export class PostBusiness {
 
 
     public updatePost = async (input: EditPostInput): Promise<EditPostOutput> => {
-        const { token, idToEdit, ...updates } = input; // Use o operador spread para obter as atualizações
+        const { token, idToEdit, ...updates } = input;
       
         const payload = this.tokenManager.getPayload(token);
       
@@ -117,19 +117,16 @@ export class PostBusiness {
           throw new UnauthorizedError();
         }
       
-        // Verifique se o post a ser editado existe
         const existingPost = await this.postDatabase.findPostById(idToEdit);
       
         if (!existingPost) {
-          throw new NotFoundError("Post com esse ID não existe");
+          throw new NotFoundError("Does not exists a Post with this ID");
         }
       
-        // Verifique se o usuário atual é o criador do post
         if (payload.id !== existingPost.creator_id) {
-          throw new UnauthorizedError("Você não tem permissão para editar este post");
+          throw new UnauthorizedError("Only the creator can edit this post");
         }
       
-        // Atualize apenas os campos fornecidos no corpo da solicitação
         if (updates.title) {
           existingPost.title = updates.title;
         }
@@ -140,10 +137,9 @@ export class PostBusiness {
           existingPost.content = updates.content;
         }
       
-        // Atualize o post no banco de dados
         await this.postDatabase.updatePost(existingPost);
       
-        const output: EditPostOutput = undefined; // Seu tipo de saída correto aqui
+        const output: EditPostOutput = undefined;
         return output;
       }
       
@@ -160,11 +156,11 @@ public deletePost = async (input: GetPostByIdInput): Promise<void> => {
     const postDBandCreator = await this.postDatabase.findPostAndCreatorById(id);
   
     if (!postDBandCreator) {
-      throw new NotFoundError("Post com esse ID não existe");
+      throw new NotFoundError("Does not exists a Post with this ID");
     }
   
     if (payload.id !== postDBandCreator.creator_id) {
-      throw new UnauthorizedError("Você não tem permissão para excluir este post");
+      throw new UnauthorizedError("Only the creator can delete this post");
     }
   
     await this.postDatabase.deletePostById(id);
@@ -182,7 +178,7 @@ public deletePost = async (input: GetPostByIdInput): Promise<void> => {
         const postDBandCreator = await this.postDatabase.findPostAndCreatorById(postId)
 
         if (!postDBandCreator) {
-            throw new NotFoundError("Post com essa id não existe")
+            throw new NotFoundError("Does not exists a Post with this ID")
         }
 
         const post = new Post(
@@ -232,7 +228,7 @@ public deletePost = async (input: GetPostByIdInput): Promise<void> => {
       const postDBandCreator = await this.postDatabase.findPostAndCreatorById(postId)
 
       if (!postDBandCreator) {
-          throw new NotFoundError("Post com essa id não existe")
+          throw new NotFoundError("Does not exists a Post with this ID")
       }
 
       const likeDislikeDB: LikeDislikeDB = {
@@ -245,7 +241,7 @@ public deletePost = async (input: GetPostByIdInput): Promise<void> => {
       if (likeDislikeExists === POST_LIKE.ALREADY_LIKED) {
           return "like exist"
           } else {
-            return "like not exist"
+            return "like does not exist"
           }
   }
 
@@ -261,7 +257,7 @@ public deletePost = async (input: GetPostByIdInput): Promise<void> => {
     const postDBandCreator = await this.postDatabase.findPostAndCreatorById(postId)
 
       if (!postDBandCreator) {
-          throw new NotFoundError("Post com essa id não existe")
+          throw new NotFoundError("Does not exists a Post with this ID")
       }
 
     const likeDislikeDB: LikeDislikeDB = {
@@ -272,7 +268,7 @@ public deletePost = async (input: GetPostByIdInput): Promise<void> => {
     const postLikes = await this.postDatabase.findLikes(likeDislikeDB)
 
     if (!postLikes) {
-        throw new NotFoundError("Post sem like")
+        throw new NotFoundError("Post with 0 likes")
     }
     else{
       return postLikes

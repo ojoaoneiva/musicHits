@@ -77,7 +77,8 @@ export const PostDetailPage = ({ post, changeScreen }) => {
 
   const deletePost = async (id) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/posts/${id}`, config);
+      await axios.delete(`${BASE_URL}/posts/${id}`, config);
+      window.location.reload();
     } catch (error) {
       console.log(error.response);
       return [];
@@ -91,8 +92,9 @@ export const PostDetailPage = ({ post, changeScreen }) => {
         link: newLink || "",
         content: newContent || ""
       };
-      const response = await axios.put(`${BASE_URL}/posts/${id}`, body, config);
+      await axios.put(`${BASE_URL}/posts/${id}`, body, config);
       setEditPostOpen(!editPostOpen);
+      window.location.reload();
     } catch (error) {
       console.log(error.response);
       return [];
@@ -112,7 +114,6 @@ export const PostDetailPage = ({ post, changeScreen }) => {
     try {
       const response = await axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
       findLike(post.id)
-      console.log(response.data.likes)
       setLikes(response.data.likes)
     } catch (error) {
       console.log(error.response);
@@ -122,7 +123,6 @@ export const PostDetailPage = ({ post, changeScreen }) => {
   const findLike = async (id) => {
     try {
       const response = await axios.get(`${BASE_URL}/posts/${id}/like`, config);
-      console.log(response.data)
       if (response.data === "like exist") {
         setLiked(true)
       } else {
@@ -150,6 +150,7 @@ export const PostDetailPage = ({ post, changeScreen }) => {
           };
         })
       );
+      setComments(commentsWithLikes);
       return {
         comments: commentsWithLikes,
         commentCount: commentsData.length
@@ -168,7 +169,7 @@ export const PostDetailPage = ({ post, changeScreen }) => {
       const body = {
         content: newComment
       };
-      const response = await axios.post(`${BASE_URL}/comments/${id}`, body, config);
+      await axios.post(`${BASE_URL}/comments/${id}`, body, config);
       getComments(id);
       setNewComment("");
     } catch (error) {
@@ -178,7 +179,7 @@ export const PostDetailPage = ({ post, changeScreen }) => {
 
   const likeComment = async (id, postId) => {
     try {
-      const response = await axios.post(`${BASE_URL}/comments/${id}/like`, {}, config);
+      await axios.post(`${BASE_URL}/comments/${id}/like`, {}, config);
       getComments(postId);
     } catch (error) {
       console.log(error.response);
@@ -202,7 +203,6 @@ export const PostDetailPage = ({ post, changeScreen }) => {
   const editPostBox = () => {
     setEditPostOpen(!editPostOpen);
     setIsActionBoxOpen(!isActionBoxOpen);
-    console.log(post);
   };
 
   const editPostBoxClose = () => {
@@ -255,7 +255,7 @@ export const PostDetailPage = ({ post, changeScreen }) => {
             </div>
           )}
 
-          <CommentUser>Enviado por: {post.creator.name}</CommentUser>
+          <CommentUser>Posted by: {post.creator.name}</CommentUser>
           <CommentTitle>{post.title}</CommentTitle>
           <VideoContainer>
             <YouTubeVideo videoUrl={post.link} />
@@ -287,7 +287,7 @@ export const PostDetailPage = ({ post, changeScreen }) => {
                     <LikeDislike>
                       <button
                         onClick={() => likeComment(comment.id, post.id)}
-                        className={comment.liked === true ? "likedComment" : "notlikedComment"}
+                        className={comment.liked ? "liked" : "notliked"}
                       >
                         <FontAwesomeIcon icon={faHeart} /> {comment.likes}
                       </button>
@@ -300,12 +300,12 @@ export const PostDetailPage = ({ post, changeScreen }) => {
               )}
               <NewCommentContainer>
                 <NewCommentInput
-                  placeholder="Adicionar um comentário..."
+                  placeholder="Write a comment..."
                   value={newComment}
                   onChange={handleNewCommentChange}
                 />
                 <SolidButton onClick={() => createComment(post.id)}>
-                  Responder
+                  Comment
                 </SolidButton>
               </NewCommentContainer>
             </div>
@@ -318,21 +318,21 @@ export const PostDetailPage = ({ post, changeScreen }) => {
                 <Close2 onClick={editPostBoxClose}>x</Close2>
                 <NewCommentContainer>
                   <NewTitleInput
-                    placeholder="Título..."
+                    placeholder="Post title..."
                     value={newTitle}
                     onChange={handleNewTitleChange}
                   />
                   <NewTitleInput
-                    placeholder="Link do youtube..."
+                    placeholder="Youtube link..."
                     value={newLink}
                     onChange={handleNewLinkChange}
                   />
                   <NewCommentInput
-                    placeholder="Escreva seu post..."
+                    placeholder="Write a post..."
                     value={newContent}
                     onChange={handleNewContentChange}
                   />
-                  <SolidButton onClick={() => editPost(post.id)}>Postar</SolidButton>
+                  <SolidButton onClick={() => editPost(post.id)}>Post</SolidButton>
                 </NewCommentContainer>
               </ContainerEdit>
               <Background></Background>

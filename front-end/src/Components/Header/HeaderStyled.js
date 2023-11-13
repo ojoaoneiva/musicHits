@@ -11,7 +11,7 @@ export const HeaderStyle = styled.header`
    color: black;
    border-left: 1px solid gray;
    z-index:25;
-   display: ${props => (props.mobileMenuOpen ? 'flex' : 'none')};
+   display: ${(props) => (props.mobilemenuopen === 'true' ? 'flex' : 'none')};
    @media screen and (min-width: 900px) {
     width: 30%;
     display: flex;
@@ -89,8 +89,8 @@ export const MobileButton = styled.button`
   @media screen and (min-width: 900px) {
     display: none;
   }
-  display: ${props => (props.mobileMenuOpen ? 'none' : 'flex')};
-  position: ${props => (props.mobileMenuOpen ? '' : 'fixed')};
+  display: ${(props) => (props.mobilemenuopen === 'true' ? 'none' : 'flex')};
+  position: ${(props) => (props.mobilemenuopen === 'true' ? '' : 'fixed')};
   cursor: pointer;
   font-size: 20px;
   padding: 20px;
@@ -106,7 +106,7 @@ export const MobileButton = styled.button`
 `;
 
 export const Close = styled.button`
-display: ${props => (props.menuOpen ? 'flex' : 'none')};
+ display: ${(props) => (props.menuopen === 'true' ? 'flex' : 'none')};
   @media screen and (min-width: 900px) {
     display: none;
   }
