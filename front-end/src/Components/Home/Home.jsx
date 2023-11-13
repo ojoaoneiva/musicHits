@@ -57,40 +57,63 @@ export const Home = () => {
     getPosts();
   }, [viewAllUsers]);
 
-  const getPosts = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/posts/`, config);
-      const postsData = response.data;
+ // Adicione este estado no início do seu componente
+ const [renderedPosts, setRenderedPosts] = useState(new Set());
 
-      const postsWithCommentCount = await Promise.all(
-        postsData.map(async (post) => {
-          const commentsResponse = await getComments(post.id);
-          const likeResponse = await findLike(post.id);
-          const isLiked = likeResponse === "like exist" ? true : false;
 
-          const isFollowing = await checkIfAlreadyFollowing(post.creator.id);
+// ...
+
+const getPosts = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/posts/`, config);
+    const postsData = response.data;
+
+    const postsWithCommentCount = await Promise.all(
+      postsData.map(async (post) => {
+        const commentsResponse = await getComments(post.id);
+        const likeResponse = await findLike(post.id);
+        const isLiked = likeResponse === "like exist" ? true : false;
+
+        const isFollowing = await checkIfAlreadyFollowing(post.creator.id);
+
+        const postId = post.id;
+
+        // Verifique se o post já foi renderizado
+        if (!renderedPosts.has(postId)) {
+          // Se não foi renderizado, adicione ao conjunto e continue a renderização
+          setRenderedPosts((prevPosts) => new Set([...prevPosts, postId]));
 
           return {
             ...post,
             commentCount: commentsResponse.length,
             liked: isLiked,
-            isFollowing: isFollowing
+            isFollowing: isFollowing,
           };
-        })
-      );
+        }
 
-      setPosts(postsWithCommentCount);
+        // Se já foi renderizado, retorne null para evitar renderização
+        return null;
+      })
+    );
 
-      setFriendsPosts(
-        postsWithCommentCount.filter((post) => 
-            post.creator.id !== localStorage.getItem("userId") && post.isFollowing===true
-          )
-        );
-      
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+    // Filtra os posts nulos (que já foram renderizados)
+    const filteredPosts = postsWithCommentCount.filter((post) => post !== null);
+
+    setPosts(filteredPosts);
+
+    setFriendsPosts(
+      filteredPosts.filter(
+        (post) =>
+          post.creator.id !== localStorage.getItem("userId") &&
+          post.isFollowing === true
+      )
+    );
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+
 
   const checkIfAlreadyFollowing = async (creatorId) => {
     try {
@@ -235,7 +258,7 @@ export const Home = () => {
   };
   const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(5);
-  const [visiblePosts, setVisiblePosts] = useState(10);
+  const [visiblePosts, setVisiblePosts] = useState(5);
   const [visibleComments, setVisibleComments] = useState(5);
   const [scrollThreshold, setScrollThreshold] = useState(600);
   const [debounceDelay, setDebounceDelay] = useState(20);
@@ -246,7 +269,7 @@ export const Home = () => {
 
 
   useEffect(() => {
-    setVisiblePosts(10);
+    setVisiblePosts(5);
     setOffset(5)
   }, []);
 
@@ -344,6 +367,7 @@ export const Home = () => {
     window.location.reload();
     setViewAllUsers(false);
   };
+  
 
   return (
     <>
@@ -367,8 +391,8 @@ export const Home = () => {
         ) : (<>
           {viewAllUsers ? (
             <CommentList>
-              {posts.slice(0, visiblePosts).map((post) => (
-                <CommentItem key={post.id}>
+              {posts.slice(0, visiblePosts).map((post, index) => (
+                <CommentItem key={index}>
                   <CommentUser>
                     <button onClick={() => goToProfile(navigate, post.creator.id)}>
                       {post.creator.name}
