@@ -6,7 +6,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import { Container, Input } from './SearchStyled'
 import { goToProfile } from "../../router/Coordinator";
 
-export const Search = () => {
+export const Search = ({setSearchOpen, closeAll, toggleMenu, searchOpen}) => {
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,6 +52,13 @@ export const Search = () => {
     setSearchQuery(query);
   };
 
+  const profile = async (id) => {
+    goToProfile(navigate, id)
+    setSearchOpen(!searchOpen);
+    toggleMenu();
+    closeAll()
+  };
+
   return (
     <>
       <Container>
@@ -65,7 +72,7 @@ export const Search = () => {
         <ul>
           {searchResults.map((user) => (
             <li key={user.id}>
-              <button onClick={() => goToProfile(navigate, user.id)}>
+              <button onClick={()=>profile(user.id)}>
                 {user.name}
               </button>
             </li>

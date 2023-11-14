@@ -61,6 +61,12 @@ export const Header = () => {
         setMobileMenuOpen(false);
     };
 
+    const closeAll = () => {
+        setSearchOpen(false);
+        setNotificationsOpen(false);
+        setMobileMenuOpen(false);
+      };
+
     return (
         <>
             <MobileButton onClick={toggleMobileMenu} menuopen={menuopen.toString()}>Menu</MobileButton>
@@ -101,8 +107,8 @@ export const Header = () => {
                             </ul>
                         </div>
                     )}
-                    {notificationsOpen && <Notifications/>}
-                    {searchOpen && <Search />}
+                    {notificationsOpen && <Notifications closeAll={closeAll} toggleMenu={toggleMenu} notificationsOpen={notificationsOpen} setNotificationsOpen={setNotificationsOpen}/>}
+                    {searchOpen && <Search closeAll={closeAll} toggleMenu={toggleMenu} searchOpen={searchOpen} setSearchOpen={setSearchOpen}/>}
                     {createPostOpen && <Post createPostOpen={createPostOpen} setCreatePostOpen={setCreatePostOpen} />}
 
                 </div>

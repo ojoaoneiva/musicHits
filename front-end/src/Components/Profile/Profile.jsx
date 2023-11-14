@@ -184,27 +184,27 @@ export const Profile = () => {
       <Header />
       <Container>
         <UserProfileContainer>
-          {user && user.profilePhoto ? (
+          
+          <UserProfileInfo>
+            {user && user.profilePhoto ? (
             <UserProfilePicture src={user.profilePhoto} alt={user.name} />
           ) : (
             <NoUserProfilePicture>{user && user.name ? user.name[0] : ""}</NoUserProfilePicture>
           )}
-
-          <UserProfileInfo>
             <UserProfileName>{user && user.name}</UserProfileName>
             <UserProfileStats>
               <UserProfileStat onClick={followersListOpen}> <div>{followers.length}</div> followers </UserProfileStat>
               <UserProfileStat onClick={followingListOpen}> <div>{following.length}</div> following  </UserProfileStat>
-              {userId !== localStorage.getItem("userId") && alreadyFollowing && (
-                <Unfollow><button onClick={() => followOrUnfollow(userId)}> Unfollow - </button></Unfollow>
+            </UserProfileStats>
+            {userId !== localStorage.getItem("userId") && alreadyFollowing && (
+                <Unfollow><button onClick={() => followOrUnfollow(userId)}> Unfollow </button></Unfollow>
               )}
               {userId !== localStorage.getItem("userId") && !alreadyFollowing && (
-                <Follow><button onClick={() => followOrUnfollow(userId)}> Follow + </button></Follow>
+                <Follow><button onClick={() => followOrUnfollow(userId)}> Follow </button></Follow>
               )}
-              {userId === localStorage.getItem("userId") && (
+            {userId === localStorage.getItem("userId") && (
                 <button onClick={() => renderPostDetail(user)}>settings</button>
               )}
-            </UserProfileStats>
             <UserProfileBio>{user && user.bio ? user.bio : ""}</UserProfileBio>
           </UserProfileInfo>
 

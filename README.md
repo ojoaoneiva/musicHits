@@ -1,4 +1,4 @@
-# [Music Hits](https://)
+# [Music Hits](https://musichits.surge.sh/)
 
 <p align="center">
   <img src="./front-end/src/assets/musichits1.gif" alt="project gif" width="600">
@@ -8,7 +8,7 @@
 </p>
 
 
-Go to the API Docummentation [here](https://)
+Go to the API Docummenter [here](https://documenter.getpostman.com/view/27685475/2s9YXmVzVu)
 
 ## About:
 The "Music Hits" project aims to build a fullstack website, with a responsive frontend of a social media plataform to share music videos and its backend applicaction that builds an API with data source for users, posts, likes, and comments. The front-end consists on pages for login and signup, profile page, Home page with all user's posts or friend's posts, and sections to show notifications, search for users and create new posts.
@@ -31,10 +31,10 @@ The "Music Hits" project aims to build a fullstack website, with a responsive fr
 - [x]  <strong>Database:</strong> All the users, posts, comments and likes/dislikes information are storaged on an SQLite database in the backend.
 
 ## Front-end deploy:
-https://
+https://musichits.surge.sh/
 
 ## Back-end deploy:
-https://
+https://musichits-backend.onrender.com
 
 
 ## How to run the back-end project:
@@ -59,6 +59,7 @@ The app's back-end is already deployed, but if you want to run the project in yo
     npm run dev
 
 # The server will start on localhost:3003
+# The API documenter is here: https://documenter.getpostman.com/view/27685475/2s9YXmVzVu
 ```
 
 ## How to run the front-end project:
@@ -102,6 +103,7 @@ The app's front-end is already deployed, but if you want to run the project in y
 ## Images:
 
 <p align="center">
+  <img src="./front-end/src/assets/mobile.jpg" alt="project print screen" width="600">
   <img src="./front-end/src/assets/1.JPG" alt="project print screen" width="600">
   <img src="./front-end/src/assets/2.JPG" alt="project print screen" width="600">  
   <img src="./front-end/src/assets/3.JPG" alt="project print screen" width="600">  

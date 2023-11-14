@@ -27,11 +27,18 @@ export const UserProfilePicture = styled.img`
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
+  position: absolute;
+  left: 40px;
   @media screen and (max-width: 900px) {
-    width: 8vw;
-  height: 8vw;
-  position: relative;
-  top: -40px;
+    width: 60px;
+  height: 60px;
+  margin-top: 10px;
+  left: 20px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 15vw;
+  height: 15vw;
+  margin-top: 15px;
   }
 `;
 
@@ -45,16 +52,29 @@ export const NoUserProfilePicture = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 4vw;
+  border-radius: 50%;
+  position: absolute;
+  left: 40px;
   @media screen and (max-width: 900px) {
-    width: 8vw;
-  height: 8vw;
-  position: relative;
-  top: -40px;
+    width: 60px;
+  height: 60px;
+  margin-top: 10px;
+  left: 20px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 15vw;
+  height: 15vw;
+  margin-top: 15px;
   }
 `;
 
 export const UserProfileInfo = styled.div`
-  margin-left: 20px;
+  margin-left: 10px;
+  padding-left: 150px;
+  @media screen and (max-width: 900px) {
+  padding-left: 70px;
+  margin-left: 0;
+  }
 `;
 
 export const UserProfileName = styled.h2`
@@ -78,6 +98,7 @@ export const UserProfileStat = styled.button`
   font-size: 16px;
   background-color: transparent;
   border: none;
+  margin-bottom: 10px;
   cursor: pointer;
   div{
     font-weight: 600;
@@ -180,7 +201,6 @@ export const Background = styled.div`
 `;
 
 export const Follow = styled.div`
-margin-top: -7px;
   button {
     padding: 5px;
     color: white;
@@ -197,7 +217,6 @@ margin-top: -7px;
 `;
 
 export const Unfollow = styled.div`
-margin-top: -7px;
   button {
     padding: 5px;
     color: white;

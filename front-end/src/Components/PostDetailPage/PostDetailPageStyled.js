@@ -39,12 +39,14 @@ export const Container = styled.div`
   padding-bottom: 40px;
   }
   @media screen and (max-width: 500px) {
+    overflow-y: scroll;
+    overflow-x: hidden;
     width: 80%;
   height: fit-content;
   max-height: 85%;
   padding: 10px;
   padding-right: 15px;
-  left: 8%;
+  left: 7%;
   }
 `;
 

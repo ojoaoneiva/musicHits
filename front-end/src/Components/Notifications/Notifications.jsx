@@ -7,7 +7,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import { goToProfile } from "../../router/Coordinator";
 import { useNavigate } from "react-router-dom";
 
-export const Notifications = () => {
+export const Notifications = ({setNotificationsOpen, closeAll,toggleMenu, notificationsOpen}) => {
   const [allNotifications, setAllNotifications] = useState([]);
   const [finalNotifications, setfinalNotifications] = useState([]);
 
@@ -102,6 +102,13 @@ export const Notifications = () => {
     }
   };
 
+  const profile = async (id) => {
+    goToProfile(navigate, id)
+    setNotificationsOpen(!notificationsOpen);
+    toggleMenu();
+    closeAll()
+  };
+
   return (
     <Container>
       <h1>Notifications</h1>
@@ -110,14 +117,14 @@ export const Notifications = () => {
           <Li key={index}>
             {notification.userIdFollowing ? (
               <div>
-                <User onClick={() => goToProfile(navigate, notification.userIdFollower)}>
+                <User onClick={()=>profile(notification.userIdFollower)}>
                   {notification.name}
                 </User>
                 just followed you</div>
             ) : (
               <>
                 <div>
-                  <User onClick={() => goToProfile(navigate, notification.user_id)}>
+                  <User onClick={()=>profile(notification.user_id)}>
                     {notification.name}
                   </User> liked your post:
                 </div>

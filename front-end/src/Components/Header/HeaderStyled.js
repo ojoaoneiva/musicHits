@@ -55,6 +55,10 @@ export const HeaderStyle = styled.header`
           @media screen and (min-width: 900px) {
               font-size: 3.5vw;
           }
+          @media screen and (max-width: 500px) {
+              font-size: 13vw;
+              overflow: hidden;
+          }
   
       }
     }

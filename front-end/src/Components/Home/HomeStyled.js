@@ -242,3 +242,20 @@ export const Loading = styled.div`
     margin-top: 40vh;
   }
 `;
+
+export const Loading2 = styled.div`
+  height: 1vh;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  font-size: 2vw;
+  position: fixed;
+  bottom: 80px;
+  z-index: 55;
+  width:60%;
+  @media screen and (max-width: 900px) {
+    font-size: 20px;
+    width:90%;
+  }
+`;

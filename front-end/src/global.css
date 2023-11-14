@@ -1,6 +1,5 @@
+
 body {
-    font-family: sans-serif, 'Anton',;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
+  font-family: 'Anton', 'Segoe UI', sans-serif;
+  src: local('Anton-Regular'), url(https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap) format('truetype');
+}
