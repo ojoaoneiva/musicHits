@@ -1,4 +1,4 @@
-# [Music Hits](https://)
+# [Music Hits](https://musichits.surge.sh/)
 
 <p align="center">
   <img src="./front-end/src/assets/musichits1.gif" alt="project gif" width="600">
@@ -31,10 +31,10 @@ The "Music Hits" project aims to build a fullstack website, with a responsive fr
 - [x]  <strong>Database:</strong> All the users, posts, comments and likes/dislikes information are storaged on an SQLite database in the backend.
 
 ## Front-end deploy:
-https://
+https://musichits.surge.sh/
 
 ## Back-end deploy:
-https://
+https://musichits-backend.onrender.com
 
 
 ## How to run the back-end project:
