@@ -24,6 +24,7 @@ export const LoginPage = () => {
 
   const { form, onChange } = useForms({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -32,17 +33,21 @@ export const LoginPage = () => {
   const sendLogin = async (event) => {
     event.preventDefault();
     try {
+      setIsLoading(true);
+
       const body = {
         email: form.email,
         password: form.password,
       };
       const res = await axios.post(`${BASE_URL}/users/login`, body);
       localStorage.setItem("token", res.data.token);
-      getUserId(res.data.token)
+      getUserId(res.data.token);
       goToHome(navigate);
     } catch (error) {
       alert(error?.response?.data);
       console.error(error?.response?.data);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -110,6 +115,7 @@ export const LoginPage = () => {
             Creat an account
           </button>
         </Subtitle1>
+        {isLoading && <div>Loading...Please wait</div>}
       </Container>
     </>
   );
