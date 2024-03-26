@@ -17,7 +17,7 @@ export const Routess = () => {
         <Route index element={<Home />} />
         <Route path="/Login/" element={<LoginPage />} />
         <Route path="/SignUp/" element={<SignUpPage />} />
-        <Route path="/Home/" element={<Home/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/Search/" element={<Search/>} />
         <Route path="/Post/" element={<Post/>} />
         <Route path="/Profile/:userId" element={<Profile />} />
