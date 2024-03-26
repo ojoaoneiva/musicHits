@@ -3,9 +3,10 @@ import { BASE_URL } from "../../constants/BASE_URL";
 import useForms from "../../hooks/useForms";
 import { useNavigate } from "react-router-dom";
 import { goToHome, goToLoginPage } from "../../router/Coordinator"
-import { Container, Title, SingUp, Form, Text, Icon, Subtitle1, Subtitle2, InputContainer, Input, SolidButton, ButtonContainer } from "./SignUpPageStyled"
+import { Container, Title, SingUp, Form, Text, Icon, Subtitle1, Subtitle2, InputContainer, Input, Loading, SolidButton, ButtonContainer } from "./SignUpPageStyled"
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import loading from "../../assets/loading.gif";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
@@ -117,7 +118,9 @@ export const SignUpPage = () => {
             Login
           </button>
         </Subtitle1>
-        {isLoading && <div>Loading...Please wait</div>}
+        {isLoading && <Loading>Creating user. Please wait
+          <img src={loading}/>
+          </Loading>}
       </Container>
     </>
   )

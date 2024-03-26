@@ -133,6 +133,15 @@ export const ButtonContainer = styled.div`
   margin-top: -1vw;
 `;
 
+export const Loading = styled.div`
+margin-top: -20px;
+color: gray;
+img{
+   margin: 0 10px;
+   width: 40px;
+}
+`;
+
 export const SolidButton = styled.button`
   background: #5f62f1;
   color: white;
